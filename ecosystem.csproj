@@ -24,7 +24,12 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="fauna\Animal.ts" />
+    <TypeScriptCompile Include="behaviour\animalStates.ts" />
+    <TypeScriptCompile Include="behaviour\brain.ts" />
+    <TypeScriptCompile Include="behaviour\diseaseSpreadType.ts" />
+    <TypeScriptCompile Include="fauna\animal.ts" />
+    <TypeScriptCompile Include="fauna\disease.ts" />
+    <TypeScriptCompile Include="genetics\chromosome.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Include="web.Debug.config">
