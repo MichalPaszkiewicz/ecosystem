@@ -2,11 +2,28 @@
 
     export class Animal {
 
-        size: number;
+        size: Chromosome;
 
-        constructor() {
-            this.size = 100;
+        aggressiveness: Chromosome;
+
+        brain: Behaviour.Brain;
+
+        behaviourState: Behaviour.AnimalBehaviourState;
+
+        movementState: Behaviour.AnimalMovementState;
+
+        move: () => void;
+
+        constructor(size: Chromosome) {
+            this.size = size;
+
+            this.behaviourState = Behaviour.AnimalBehaviourState.RESTING;
+
+            this.movementState = Behaviour.AnimalMovementState.STILL;
+
+            this.brain = new Behaviour.Brain([]);
         }
+
     } 
 
 }    
