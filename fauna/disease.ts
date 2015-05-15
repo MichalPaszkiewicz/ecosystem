@@ -4,7 +4,9 @@
 
         spreadType: Behaviour.DiseaseSpreadType;
 
-        _killRate: number;
+        private _killRate: number;
+
+        private _damage: number;
 
         get killRate(): number {
             return this._killRate;
@@ -15,6 +17,18 @@
             }
             else {
                 throw new Error("The kill rate must be a value equal to or between 0 and 1");
+            }
+        }
+
+        get damage(): number {
+            return this._damage;
+        }
+        set damage(damage: number) {
+            if (damage >= 0 && damage <= 10){
+                this._damage = damage;
+            }
+            else {
+                throw new Error();
             }
         }
 

@@ -48,12 +48,39 @@ var Ecosystem;
 (function (Ecosystem) {
     var Animal = (function () {
         function Animal(size) {
+            this._alive = true;
             this.size = size;
             this.behaviourState = 3 /* RESTING */;
             this.movementState = 4 /* STILL */;
             this.brain = new Ecosystem.Behaviour.Brain([]);
             this.diseases = [];
+            this.health = 100;
         }
+        Object.defineProperty(Animal.prototype, "health", {
+            get: function () {
+                return this._health;
+            },
+            set: function (health) {
+                if (this.health >= 0 && this.health <= 100) {
+                    this.health = health;
+                }
+                else {
+                    throw new Error("Health cannot be set to less than 0 or more than 100");
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Animal.prototype.fightDiseases = function () {
+            for (var i in this.diseases) {
+                if (Math.random() > this.diseases[i].killRate) {
+                    this.health = Math.max(0, this.health - this.diseases[i].damage);
+                }
+                if (this.health == 0) {
+                    this._alive = false;
+                }
+            }
+        };
         return Animal;
     })();
     Ecosystem.Animal = Animal;
@@ -75,6 +102,21 @@ var Ecosystem;
                 }
                 else {
                     throw new Error("The kill rate must be a value equal to or between 0 and 1");
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Disease.prototype, "damage", {
+            get: function () {
+                return this._damage;
+            },
+            set: function (damage) {
+                if (damage >= 0 && damage <= 10) {
+                    this._damage = damage;
+                }
+                else {
+                    throw new Error();
                 }
             },
             enumerable: true,
