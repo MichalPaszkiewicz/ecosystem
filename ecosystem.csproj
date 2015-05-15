@@ -27,6 +27,9 @@
     <TypeScriptCompile Include="behaviour\animalStates.ts" />
     <TypeScriptCompile Include="behaviour\brain.ts" />
     <TypeScriptCompile Include="behaviour\diseaseSpreadType.ts" />
+    <TypeScriptCompile Include="geography\region.ts" />
+    <TypeScriptCompile Include="geography\weather.ts" />
+    <TypeScriptCompile Include="geography\world.ts" />
     <TypeScriptCompile Include="fauna\animal.ts" />
     <TypeScriptCompile Include="fauna\disease.ts" />
     <TypeScriptCompile Include="genetics\chromosome.ts" />

@@ -14,6 +14,8 @@
 
         move: () => void;
 
+        diseases: Disease[];
+
         constructor(size: Chromosome) {
             this.size = size;
 
@@ -22,6 +24,8 @@
             this.movementState = Behaviour.AnimalMovementState.STILL;
 
             this.brain = new Behaviour.Brain([]);
+
+            this.diseases = [];
         }
 
     } 

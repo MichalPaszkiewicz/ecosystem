@@ -52,6 +52,7 @@ var Ecosystem;
             this.behaviourState = 3 /* RESTING */;
             this.movementState = 4 /* STILL */;
             this.brain = new Ecosystem.Behaviour.Brain([]);
+            this.diseases = [];
         }
         return Animal;
     })();
@@ -60,9 +61,28 @@ var Ecosystem;
 var Ecosystem;
 (function (Ecosystem) {
     var Disease = (function () {
-        function Disease(spreadBy) {
+        function Disease(spreadBy, killRate) {
             this.spreadType = spreadBy;
+            this.killRate = killRate;
         }
+        Object.defineProperty(Disease.prototype, "killRate", {
+            get: function () {
+                return this._killRate;
+            },
+            set: function (rate) {
+                if (rate >= 0 && rate <= 1) {
+                    this._killRate = rate;
+                }
+                else {
+                    throw new Error("The kill rate must be a value equal to or between 0 and 1");
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Disease.prototype.infect = function (animal) {
+            animal.diseases.push(this);
+        };
         return Disease;
     })();
     Ecosystem.Disease = Disease;
@@ -76,5 +96,62 @@ var Ecosystem;
         return Chromosome;
     })();
     Ecosystem.Chromosome = Chromosome;
+})(Ecosystem || (Ecosystem = {}));
+var Ecosystem;
+(function (Ecosystem) {
+    var Geography;
+    (function (Geography) {
+        var Region = (function () {
+            function Region() {
+            }
+            return Region;
+        })();
+        Geography.Region = Region;
+    })(Geography = Ecosystem.Geography || (Ecosystem.Geography = {}));
+})(Ecosystem || (Ecosystem = {}));
+var Ecosystem;
+(function (Ecosystem) {
+    var Geography;
+    (function (Geography) {
+        (function (PrecipitationType) {
+            PrecipitationType[PrecipitationType["NONE"] = 0] = "NONE";
+            PrecipitationType[PrecipitationType["RAIN"] = 1] = "RAIN";
+            PrecipitationType[PrecipitationType["SLEET"] = 2] = "SLEET";
+            PrecipitationType[PrecipitationType["SNOW"] = 3] = "SNOW";
+        })(Geography.PrecipitationType || (Geography.PrecipitationType = {}));
+        var PrecipitationType = Geography.PrecipitationType;
+        var Weather = (function () {
+            function Weather() {
+                this.precipitation = 0 /* NONE */;
+                this.temperature = 273.16;
+            }
+            return Weather;
+        })();
+        Geography.Weather = Weather;
+    })(Geography = Ecosystem.Geography || (Ecosystem.Geography = {}));
+})(Ecosystem || (Ecosystem = {}));
+var Ecosystem;
+(function (Ecosystem) {
+    var Geography;
+    (function (Geography) {
+        // standard singleton pattern
+        var World = (function () {
+            function World() {
+                this.regions = [];
+            }
+            Object.defineProperty(World, "Instance", {
+                get: function () {
+                    if (this.instance === null || this.instance === undefined) {
+                        this.instance = new World();
+                    }
+                    return this.instance;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return World;
+        })();
+        Geography.World = World;
+    })(Geography = Ecosystem.Geography || (Ecosystem.Geography = {}));
 })(Ecosystem || (Ecosystem = {}));
 //# sourceMappingURL=@script.js.map
