@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "out": "@script.js",
+        "sourceMap": true,
+        "target": "es5"
+    }
+}
